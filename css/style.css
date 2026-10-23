@@ -250,7 +250,7 @@ button.btn { border: 0; cursor: pointer; }
   .field-row { grid-template-columns: 1fr; }
   .modal { padding: 40px 20px 24px; }
   /* Skicka-knappen följer med längst ner så att den alltid syns */
-  .btn--submit { position: sticky; bottom: 0; z-index: 1; box-shadow: 0 -14px 0 8px #fff, 0 8px 22px rgba(74, 124, 247, .45); }
+  .btn--submit { position: sticky; bottom: 0; z-index: 1; box-shadow: 0 8px 22px rgba(74, 124, 247, .45); }
 }
 
 @media (prefers-reduced-motion: reduce) {

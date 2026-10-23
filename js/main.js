@@ -55,7 +55,7 @@ const EN = {
   "cta_a1": "No obligations",
   "cta_a2": "100% confidentiality",
   "f_desc": "Authorised accounting firm focused on modern digital solutions, fixed prices and a personal relationship for Swedish companies.",
-  "f_meta": "Org. no.: 556123-4567 • Approved for F-tax",
+  "f_meta": "Org. no.: 559044-1597 • Approved for F-tax",
   "f_contact": "Contact",
   "f_services": "Services",
   "f_hours": "Monday–Thursday: 8:00–16:00",

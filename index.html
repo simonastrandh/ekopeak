@@ -13,8 +13,8 @@
 <body>
 
   <!-- Header -->
-  <div class="site-header" id="top">
-    <div class="site-header__inner">
+  <header class="site-header" id="top">
+    <div class="site-header__bar">
       <a href="#top" class="site-header__logo" aria-label="Ekopeak Billdal AB">
         <img src="images/logotyp_faerg.png" alt="Ekopeak Billdal AB" width="1039" height="248">
       </a>
@@ -29,9 +29,17 @@
           <span id="lang-label">SV</span>
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19"/><path d="M12 2.5c2.6 2.8 4 6 4 9.5s-1.4 6.7-4 9.5c-2.6-2.8-4-6-4-9.5s1.4-6.7 4-9.5z"/></svg>
         </button>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Meny" aria-expanded="false" aria-controls="mobile-menu" data-i18n-aria-label="menu_label">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
-  </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#tjanster" data-i18n="nav_services">Tjänster</a>
+      <a href="#kontakt" data-i18n="nav_contact">Kontakt</a>
+      <button type="button" class="btn btn--primary btn--menu" data-open-booking data-i18n="book_cta">Boka en fri rådgivning</button>
+    </div>
+  </header>
 
   <!-- Hero -->
   <section class="hero">

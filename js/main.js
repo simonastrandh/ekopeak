@@ -1,5 +1,6 @@
 // ---------- Språk (SV / EN) ----------
 const EN = {
+  "menu_label": "Menu",
   "f_city": "Gothenburg",
   "nav_services": "Services",
   "nav_contact": "Contact",
@@ -229,3 +230,20 @@ function updateCardObserver() {
 }
 updateCardObserver();
 mobileQuery.addEventListener("change", updateCardObserver);
+
+// ---------- Header / mobilmeny ----------
+const siteHeader = document.querySelector(".site-header");
+const navToggle = document.getElementById("nav-toggle");
+
+function setMenu(open) {
+  siteHeader.classList.toggle("is-open", open);
+  navToggle.setAttribute("aria-expanded", String(open));
+}
+navToggle.addEventListener("click", () => setMenu(!siteHeader.classList.contains("is-open")));
+document.querySelectorAll(".mobile-menu a, .mobile-menu button").forEach((el) =>
+  el.addEventListener("click", () => setMenu(false))
+);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") setMenu(false);
+});
+window.matchMedia("(min-width: 961px)").addEventListener("change", () => setMenu(false));

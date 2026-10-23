@@ -110,7 +110,8 @@ button.btn { border: 0; cursor: pointer; }
   display: flex; flex-direction: column; padding: 20px 20px 30px;
   transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease, background-color .3s ease;
 }
-.service:hover {
+.service:hover,
+.service.is-active {
   transform: translateY(-8px);
   border-color: var(--blue);
   background: #fff;
@@ -122,8 +123,10 @@ button.btn { border: 0; cursor: pointer; }
   transition: background-color .3s ease, transform .3s ease;
 }
 .service__icon svg { width: 22px; height: 22px; fill: none; stroke: var(--blue); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: stroke .3s ease; }
-.service:hover .service__icon { background: var(--blue); transform: scale(1.08) rotate(-4deg); }
-.service:hover .service__icon svg { stroke: #fff; }
+.service:hover .service__icon,
+.service.is-active .service__icon { background: var(--blue); transform: scale(1.08) rotate(-4deg); }
+.service:hover .service__icon svg,
+.service.is-active .service__icon svg { stroke: #fff; }
 .service h3 { font-size: 26px; font-weight: 500; color: var(--navy); margin-bottom: 20px; }
 .service p { font-size: 15px; color: var(--muted); }
 .service__short { margin-bottom: 24px; }

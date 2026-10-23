@@ -67,3 +67,24 @@ modal.addEventListener("close", () => {
   successEl.hidden = true;
   statusEl.hidden = true;
 });
+
+// Mobil: tjänstekorten får hover-effekten när de är i mitten av skärmen
+const mobileQuery = window.matchMedia("(max-width: 960px), (hover: none)");
+const serviceCards = document.querySelectorAll(".service");
+
+const cardObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => entry.target.classList.toggle("is-active", entry.isIntersecting));
+  },
+  { rootMargin: "-40% 0px -40% 0px" }
+);
+
+function updateCardObserver() {
+  serviceCards.forEach((card) => {
+    cardObserver.unobserve(card);
+    card.classList.remove("is-active");
+    if (mobileQuery.matches) cardObserver.observe(card);
+  });
+}
+updateCardObserver();
+mobileQuery.addEventListener("change", updateCardObserver);

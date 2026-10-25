@@ -1,5 +1,13 @@
 // ---------- Språk (SV / EN) ----------
 const EN = {
+  "skip": "Skip to main content",
+  "m_required": "Fields marked with * are required.",
+  "lang_label": "EN, change language to Swedish",
+  "m_err_name": "Please enter your name.",
+  "m_err_company": "Please enter your company name.",
+  "m_err_phone": "Please enter your phone number.",
+  "m_err_email": "Please enter a valid email address, for example anna@company.com.",
+  "m_err_message": "Please write a message.",
   "menu_label": "Menu",
   "f_city": "Gothenburg",
   "nav_services": "Services",
@@ -81,6 +89,15 @@ const EN = {
 const UI = {
   sv: {
     sending: "Skickar…",
+    summary: "Formuläret innehåller fel. Rätta de markerade fälten och försök igen.",
+    langChanged: "Språket är ändrat till svenska.",
+    errors: {
+      m_err_name: "Fyll i ditt namn.",
+      m_err_company: "Fyll i företagsnamn.",
+      m_err_phone: "Fyll i ditt telefonnummer.",
+      m_err_email: "Fyll i en giltig e-postadress, till exempel anna@foretaget.se.",
+      m_err_message: "Skriv ett meddelande.",
+    },
     error: "Något gick fel och meddelandet skickades inte. Försök igen eller mejla oss på info@ekopeak.se.",
     subject: "Bokningsförfrågan – ",
     title: "Ekopeak – Ekonomi och redovisning",
@@ -88,6 +105,8 @@ const UI = {
   },
   en: {
     sending: "Sending…",
+    summary: "The form contains errors. Correct the marked fields and try again.",
+    langChanged: "Language changed to English.",
     error: "Something went wrong and your message was not sent. Please try again or email us at info@ekopeak.se.",
     subject: "Booking request – ",
     title: "Ekopeak – Finance and accounting",
@@ -130,10 +149,15 @@ function setLanguage(lang) {
   metaDescription.setAttribute("content", UI[lang].description);
   langLabel.textContent = lang.toUpperCase();
   try { localStorage.setItem("lang", lang); } catch (e) {}
+  refreshErrors();
 }
 
 document.getElementById("lang-toggle").addEventListener("click", () => {
   setLanguage(currentLang === "sv" ? "en" : "sv");
+  // Meddela skärmläsare att språket har bytts
+  const live = document.getElementById("live-region");
+  live.textContent = "";
+  setTimeout(() => { live.textContent = UI[currentLang].langChanged; }, 50);
 });
 
 let savedLang = null;
@@ -144,8 +168,10 @@ if (savedLang === "en") setLanguage("en");
 const modal = document.getElementById("booking-modal");
 const form = document.getElementById("booking-form");
 
+let bookingOpener = null;
 document.querySelectorAll("[data-open-booking]").forEach((btn) =>
   btn.addEventListener("click", () => {
+    bookingOpener = btn.closest(".mobile-menu") || !btn.offsetParent ? document.getElementById("nav-toggle") : btn;
     modal.showModal();
     document.body.style.overflow = "hidden";
   })
@@ -160,6 +186,8 @@ modal.addEventListener("click", (e) => {
 });
 modal.addEventListener("close", () => {
   document.body.style.overflow = "";
+  // Fokus tillbaka till knappen som öppnade formuläret
+  if (bookingOpener) bookingOpener.focus();
 });
 
 // Skickas via Web3Forms → mejl till Ekopeak. Byt ut nyckeln (den är offentlig by design).
@@ -169,9 +197,58 @@ const statusEl = document.getElementById("form-status");
 const successEl = document.getElementById("booking-success");
 const submitBtn = form.querySelector('button[type="submit"]');
 
+// ---- Validering med egna, tillgängliga felmeddelanden ----
+const summaryEl = document.getElementById("form-summary");
+const fields = [...form.querySelectorAll("input[required], textarea[required]")];
+
+function errorText(field) {
+  const el = document.getElementById(field.id + "-err");
+  return (currentLang === "en" ? EN : UI.sv.errors)[el.dataset.errorKey];
+}
+
+function fieldIsValid(field) {
+  const v = field.value.trim();
+  if (!v) return false;
+  if (field.type === "email") return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  return true;
+}
+
+function showFieldError(field, show) {
+  const el = document.getElementById(field.id + "-err");
+  if (show) { el.textContent = errorText(field); el.hidden = false; }
+  else { el.textContent = ""; el.hidden = true; }
+  field.setAttribute("aria-invalid", show ? "true" : "false");
+}
+
+// Uppdatera synliga felmeddelanden och sammanfattning om språket byts
+function refreshErrors() {
+  document.querySelectorAll(".field__error:not([hidden])").forEach((el) => {
+    const field = document.getElementById(el.id.replace("-err", ""));
+    el.textContent = errorText(field);
+  });
+  const s = document.getElementById("form-summary");
+  if (s && !s.hidden) s.textContent = UI[currentLang].summary;
+}
+
+// Rätta direkt när man skriver
+fields.forEach((f) =>
+  f.addEventListener("input", () => {
+    if (f.getAttribute("aria-invalid") === "true" && fieldIsValid(f)) showFieldError(f, false);
+  })
+);
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  if (!form.reportValidity()) return;
+
+  const invalid = fields.filter((f) => !fieldIsValid(f));
+  fields.forEach((f) => showFieldError(f, invalid.includes(f)));
+  if (invalid.length) {
+    summaryEl.textContent = UI[currentLang].summary;
+    summaryEl.hidden = false;
+    summaryEl.focus();           // skärmläsare läser upp sammanfattningen
+    return;
+  }
+  summaryEl.hidden = true;
 
   const data = new FormData(form);
   data.append("access_key", WEB3FORMS_ACCESS_KEY);
@@ -194,9 +271,11 @@ form.addEventListener("submit", async (e) => {
     form.hidden = true;
     successEl.hidden = false;
     form.reset();
+    document.getElementById("success-title").focus();
   } catch (err) {
     statusEl.textContent = UI[currentLang].error;
     statusEl.hidden = false;
+    statusEl.focus();
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = (currentLang === "en" ? EN : SV).m_submit;
@@ -208,6 +287,8 @@ modal.addEventListener("close", () => {
   form.hidden = false;
   successEl.hidden = true;
   statusEl.hidden = true;
+  summaryEl.hidden = true;
+  fields.forEach((f) => showFieldError(f, false));
 });
 
 // Mobil: tjänstekorten får hover-effekten när de är i mitten av skärmen
@@ -244,6 +325,9 @@ document.querySelectorAll(".mobile-menu a, .mobile-menu button").forEach((el) =>
   el.addEventListener("click", () => setMenu(false))
 );
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") setMenu(false);
+  if (e.key === "Escape" && siteHeader.classList.contains("is-open")) {
+    setMenu(false);
+    navToggle.focus();
+  }
 });
 window.matchMedia("(min-width: 961px)").addEventListener("change", () => setMenu(false));

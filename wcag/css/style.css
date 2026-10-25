@@ -150,7 +150,7 @@ button.btn { border: 0; cursor: pointer; }
   display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px;
   padding: 0 40px 40px; border-bottom: 1px solid var(--border);
 }
-.trust__list li { display: flex; align-items: center; gap: 24px; font-weight: 500; color: var(--navy); }
+.trust__list li { padding: 4px 8px; display: flex; align-items: center; gap: 24px; font-weight: 500; color: var(--navy); }
 .check-circle {
   display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
   background: #dcf5ea; flex: none;
@@ -253,6 +253,7 @@ button.btn { border: 0; cursor: pointer; }
 .footer__col h4 { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .02em; color: #fff; margin-bottom: 20px; }
 .footer__col ul { display: grid; gap: 12px; font-size: 0.875rem; }
 .contact-list li { display: flex; align-items: center; gap: 12px; }
+.contact-list li[tabindex] { padding-inline: 4px; margin-inline: -4px; }
 .contact-list li > a, .contact-list li > span { padding: 5px 0; }
 .contact-list svg { width: 18px; height: 18px; flex: none; fill: none; stroke: #6aa8e0; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .footer__col a { transition: color .2s; }

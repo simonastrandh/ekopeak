@@ -48,8 +48,10 @@
     <img class="hero__bg" src="../images/hero.jpg" alt="">
     <div class="hero__overlay"></div>
     <div class="container hero__content">
-      <h1 data-i18n="hero_h1">Ekonomi och redovisning</h1>
+      <div class="hero__text" tabindex="0">
+        <h1 data-i18n="hero_h1">Ekonomi och redovisning</h1>
       <p class="hero__tagline" data-i18n="hero_tag">Mer tid för ditt företag.<br>Mindre tid till pappersarbete.</p>
+      </div>
       <div class="hero__actions">
         <a href="#tjanster" class="btn btn--primary" data-i18n="hero_btn1">Våra tjänster</a>
         <a href="#kontakt" class="btn btn--white" data-i18n="hero_btn2">Kontakta oss</a>
@@ -74,8 +76,8 @@
       <div class="container">
         <div class="section__head">
           <p class="eyebrow" data-i18n="svc_eyebrow">Komplett erbjudande</p>
-          <h2 data-i18n="svc_h2">Allt inom ekonomi – paketerat efter era behov</h2>
-          <p class="lead" data-i18n="svc_lead">Oavsett om du är egenföretagare eller leder ett tillväxtbolag med 50 anställda skräddarsyr vi ett fast månadspaket där allt ingår.</p>
+          <h2 tabindex="0" data-i18n="svc_h2">Allt inom ekonomi – paketerat efter era behov</h2>
+          <p class="lead" tabindex="0" data-i18n="svc_lead">Oavsett om du är egenföretagare eller leder ett tillväxtbolag med 50 anställda skräddarsyr vi ett fast månadspaket där allt ingår.</p>
         </div>
 
         <div class="services">
@@ -142,8 +144,8 @@
       <div class="container">
         <div class="section__head">
           <p class="eyebrow" data-i18n="st_eyebrow">Enkel övergång</p>
-          <h2 data-i18n="st_h2">Så smidigt blir du kund hos oss</h2>
-          <p class="lead" data-i18n="st_lead">Att byta eller skaffa redovisningsbyrå ska inte ta veckor av administrativt krångel. Vi har gjort processen enkel i tre tydliga steg.</p>
+          <h2 tabindex="0" data-i18n="st_h2">Så smidigt blir du kund hos oss</h2>
+          <p class="lead" tabindex="0" data-i18n="st_lead">Att byta eller skaffa redovisningsbyrå ska inte ta veckor av administrativt krångel. Vi har gjort processen enkel i tre tydliga steg.</p>
         </div>
 
         <div class="steps">
@@ -170,13 +172,13 @@
     <section class="cta" id="kontakt">
       <div class="container cta__inner">
         <span class="pill" data-i18n="cta_pill">Ta nästa steg idag</span>
-        <h2 data-i18n="cta_h2">Redo för en enklare ekonomivardag med full kontroll?</h2>
-        <p data-i18n="cta_p">Boka ett kostnadsfritt och förpliktelselöst introduktionsmöte. Vi tittar på hur ni arbetar idag och hur vi kan förenkla er vardag.</p>
+        <h2 tabindex="0" data-i18n="cta_h2">Redo för en enklare ekonomivardag med full kontroll?</h2>
+        <p tabindex="0" data-i18n="cta_p">Boka ett kostnadsfritt och förpliktelselöst introduktionsmöte. Vi tittar på hur ni arbetar idag och hur vi kan förenkla er vardag.</p>
         <div class="cta__actions">
           <button type="button" class="btn btn--primary btn--lg" data-open-booking aria-haspopup="dialog" data-i18n="cta_btn1">Boka en fri rådgivning idag</button>
           <a href="tel:+46706782070" class="btn btn--slate btn--lg" data-i18n="cta_btn2">Ring oss: +46 706 78 20 70</a>
         </div>
-        <ul role="list" class="cta__assurances">
+        <ul role="list" class="cta__assurances" tabindex="0">
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i18n="cta_a1">Inga förpliktelser</span></li>
           <li class="dot" aria-hidden="true">•</li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-i18n="cta_a2">100% sekretess</span></li>
@@ -189,14 +191,16 @@
   <footer class="footer">
     <div class="container footer__grid">
       <div class="footer__brand">
-        <a href="#" class="logo" aria-label="Ekopeak Billdal AB">
+        <a href="#" class="logo" tabindex="-1" aria-label="Ekopeak Billdal AB">
           <img src="../images/logotyp_faerg.png" alt="Ekopeak Billdal AB" width="1039" height="248">
         </a>
+        <div class="footer__text" tabindex="0">
         <p data-i18n="f_desc">Redovisningsbyrå med fokus på moderna digitala lösningar, fasta priser och personlig relation för svenska företag.</p>
         <p class="footer__meta" data-i18n="f_meta">Org.nr: 559044-1597 • Godkänd för F-skatt</p>
+        </div>
       </div>
       <div class="footer__col">
-        <h2 class="footer__title" data-i18n="nav_contact">Kontakt</h2>
+        <h2 class="footer__title" tabindex="0" data-i18n="nav_contact">Kontakt</h2>
         <ul role="list" class="contact-list">
           <li>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>
@@ -217,7 +221,7 @@
         </ul>
       </div>
       <div class="footer__col">
-        <h2 class="footer__title" data-i18n="nav_services">Tjänster</h2>
+        <h2 class="footer__title" tabindex="0" data-i18n="nav_services">Tjänster</h2>
         <ul role="list">
           <li><a href="#tjanster" data-i18n="s1_h">Bokföring</a></li>
           <li><a href="#tjanster" data-i18n="s2_h">Lönehantering</a></li>

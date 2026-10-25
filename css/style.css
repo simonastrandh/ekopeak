@@ -127,24 +127,21 @@ button.btn { border: 0; cursor: pointer; }
 }
 .hero__overlay {
   position: absolute; inset: 0; z-index: -1;
-  background: rgba(148, 169, 210, .2); /* #94A9D2 med 20 % opacitet */
+  /* Som i Figma: ljus tvätt (45 %) till vänster som tonar ut mot höger, plus 20 % #94A9D2. Uppmätt: rubrik ≥ 8:1, undertext #143a9a ≥ 6:1 */
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.45) 0%, rgba(255,255,255,.45) 46%, rgba(255,255,255,0) 86%),
+    rgba(148, 169, 210, .2);
 }
-/* Texten ligger på en ljus panel så att bilden kan vara kvar i sin fulla blå färg */
-.hero__panel {
-  width: fit-content; max-width: min(100%, 820px);
-  padding: 44px 52px 48px; border-radius: 28px;
-  background: rgba(255, 255, 255, .95);
-  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-  box-shadow: 0 24px 60px -20px rgba(10, 25, 60, .45);
+@media (max-width: 960px) {
+  .hero__overlay { background: linear-gradient(rgba(255,255,255,.45), rgba(255,255,255,.45)), rgba(148, 169, 210, .2); }
 }
 .hero__content { padding-block: calc(var(--header-h) + 60px) 80px; }
 .hero h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); font-weight: 600; color: #1A243B; letter-spacing: -.02em; }
 .hero__tagline {
-  margin-top: 28px; font-family: var(--font-head); font-weight: 600;
-  font-size: clamp(1.5rem, 3.2vw, 2.5rem); line-height: 1.25; color: #467FF1;
+  margin-top: 50px; font-family: var(--font-head); font-weight: 600;
+  font-size: clamp(1.5rem, 3.2vw, 2.5rem); line-height: 1.25; color: #143a9a;
 }
-.hero__actions { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 40px; }
-.hero__panel .btn--white { border: 1.5px solid #1A243B; box-shadow: none; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 43px; margin-top: 88px; }
 .hero__actions .btn { min-width: 184px; height: 43px; padding-block: 0; }
 
 /* Trust bar */
@@ -333,8 +330,7 @@ button.btn { border: 0; cursor: pointer; }
 }
 @media (max-width: 560px) {
   .hero { min-height: 88vh; min-height: 88svh; }
-  .hero__panel { padding: 28px 22px 30px; border-radius: 22px; }
-  .hero__actions { margin-top: 28px; gap: 12px; }
+  .hero__actions { margin-top: 36px; gap: 16px; }
   .footer__grid { grid-template-columns: 1fr; }
   .cta__actions { gap: 16px; margin-top: 40px; }
   .btn--lg { padding: 16px 28px; width: 100%; }

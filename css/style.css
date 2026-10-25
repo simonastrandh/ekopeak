@@ -127,19 +127,19 @@ button.btn { border: 0; cursor: pointer; }
 }
 .hero__overlay {
   position: absolute; inset: 0; z-index: -1;
-  /* 20 % #94A9D2 + mörkblått lager bakom texten. Uppmätt kontrast för vit text mot bilden: ≥ 4,8:1 */
+  /* 20 % #94A9D2 + mörkblått lager bakom texten. Uppmätt kontrast mot bilden: rubrik (vit) ≥ 5,9:1, undertext (#c4d8ff) ≥ 4,1:1 – stor text kräver 3:1 */
   background:
-    linear-gradient(90deg, rgba(12,28,70,.52) 0%, rgba(12,28,70,.52) 48%, rgba(12,28,70,.1) 85%),
+    linear-gradient(90deg, rgba(12,28,70,.58) 0%, rgba(12,28,70,.58) 48%, rgba(12,28,70,.1) 85%),
     rgba(148, 169, 210, .2);
 }
 @media (max-width: 960px) {
-  .hero__overlay { background: linear-gradient(rgba(12,28,70,.52), rgba(12,28,70,.52)), rgba(148, 169, 210, .2); }
+  .hero__overlay { background: linear-gradient(rgba(12,28,70,.58), rgba(12,28,70,.58)), rgba(148, 169, 210, .2); }
 }
 .hero__content { padding-block: calc(var(--header-h) + 60px) 80px; }
 .hero h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); font-weight: 600; color: #fff; letter-spacing: -.02em; }
 .hero__tagline {
   margin-top: 50px; font-family: var(--font-head); font-weight: 600;
-  font-size: clamp(1.5rem, 3.2vw, 2.5rem); line-height: 1.25; color: #fff;
+  font-size: clamp(1.5rem, 3.2vw, 2.5rem); line-height: 1.25; color: #c4d8ff;
 }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 43px; margin-top: 88px; }
 .hero__actions .btn { min-width: 184px; height: 43px; padding-block: 0; }
